@@ -1,4 +1,5 @@
 /node_modules/
+/src/scrap/
 /package-lock.json
 /public/bundle.js
 
