@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ExpenseListItem from './ExpenseListItem';
+import selectExpenses from '../selectors/expenses';
 
 // unconnected dumb component
 const ExpenseList = (props) => (
@@ -16,14 +17,13 @@ const ExpenseList = (props) => (
   </div>
 );
 
-// grabbing the necessary piece of state from the store
+// grab the necessary piece of state from the store
 const mapStateToProps = (state) => {
   return {
-    expenses: state.expenses,
-    filters: state.filters
+    expenses: selectExpenses(state.expenses, state.filters)
   };
 };
 
-// upgrading the dumb component to a HOC by connecting
+// upgrade the dumb component to a HOC by connecting
 // it to the store using react-redux
 export default connect(mapStateToProps)(ExpenseList);
