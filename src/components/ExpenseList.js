@@ -18,11 +18,9 @@ const ExpenseList = (props) => (
 );
 
 // grab the necessary piece of state from the store
-const mapStateToProps = (state) => {
-  return {
-    expenses: selectExpenses(state.expenses, state.filters)
-  };
-};
+const mapStateToProps = ({ expenses, filters }) => ({
+  expenses: selectExpenses(expenses, filters)
+});
 
 // upgrade the dumb component to a HOC by connecting
 // it to the store using react-redux

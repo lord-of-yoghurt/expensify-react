@@ -29,11 +29,12 @@ store.subscribe(() => {
 
 store.dispatch(addExpense({ description: 'Electric bill', amount: 500, createdAt: -21000 }));
 store.dispatch(addExpense({ description: 'Phone bill', amount: 1300, createdAt: -1000 }));
+store.dispatch(addExpense({ description: 'Lunch', amount: 1000, createdAt: 12000 }));
 store.dispatch(setTextFilter('phone'));
 
-setTimeout(() => {
-  store.dispatch(setTextFilter())
-}, 3000);
+// setTimeout(() => {
+//   store.dispatch(setTextFilter())
+// }, 3000);
 
 const jsx = (
   <Provider store={store}>
