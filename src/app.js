@@ -31,10 +31,6 @@ store.dispatch(addExpense({ description: 'Electric bill', amount: 500, createdAt
 store.dispatch(addExpense({ description: 'Phone bill', amount: 1300, createdAt: -1000 }));
 store.dispatch(setTextFilter('phone'));
 
-setTimeout(() => {
-  store.dispatch(setTextFilter('bill'))
-}, 5000);
-
 const jsx = (
   <Provider store={store}>
     <AppRouter />
