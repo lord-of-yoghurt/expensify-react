@@ -13,7 +13,8 @@ export default class ExpenseForm extends Component {
     note: '',
     amount: '',
     createdAt: moment(),
-    calendarFocused: false
+    calendarFocused: false,
+    error: ''
   };
 
   onDescriptionChange = e => {
@@ -29,29 +30,59 @@ export default class ExpenseForm extends Component {
   onAmountChange = e => {
     const amount = e.target.value;
 
-    // start with any number of digits, have an optional group of
+    // start with one or more digits, have an optional group of
     // "decimal point and another two digits" at the end
-    const re = /^\d*(\.\d{0,2})?$/;
+    const re = /^\d{1,}(\.\d{0,2})?$/;
 
-    // the input in the field will change only if the above regex
-    // is matched - otherwise, characters won't even appear
-    if (amount.match(re)) {
+    // the input in the field will change only when it's erased and
+    // if the above regex is matched - otherwise, characters won't even appear
+    if (!amount || amount.match(re)) {
       this.setState(() => ({ amount }));
     }
   };
 
   onDateChange = createdAt => {
-    this.setState(() => ({ createdAt }));
+    if (createdAt) {
+      this.setState(() => ({ createdAt }));
+    }
   }
 
   onFocusChange = ({ focused }) => {
     this.setState(() => ({ calendarFocused: focused }));
   };
 
+  onSubmitForm = e => {
+    e.preventDefault();
+
+    if (!this.state.description || !this.state.amount) {
+      this.setState(() => ({
+        error: 'Description and amount can\'t be blank!'
+      }));
+    } else {
+      this.setState(() => ({ error: '' }));
+      this.props.onSubmit({
+        description: this.state.description,
+        amount: parseFloat(this.state.amount, 10) * 100,
+        createdAt: this.state.createdAt.valueOf(),
+        note: this.state.note
+      });
+      this.clearForm();
+    }
+  }
+
+  clearForm = () => {
+    this.setState(() => ({
+      description: '',
+      amount: '',
+      note: ''
+    }));
+  }
+
   render() {
     return (
       <div>
-        <form>
+        {this.state.error && <p>Error! {this.state.error}</p>}
+        <form onSubmit={this.onSubmitForm}>
           <input
             type="text"
             placeholder="Description"
@@ -61,7 +92,7 @@ export default class ExpenseForm extends Component {
           />
           <input
             type="text"
-            placeholder="Amount"
+            placeholder="Amount (e.g. 123.45)"
             value={this.state.amount}
             onChange={this.onAmountChange}
           />
