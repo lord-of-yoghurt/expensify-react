@@ -28,9 +28,9 @@ store.subscribe(() => {
 });
 
 store.dispatch(addExpense({ description: 'Electric bill', amount: 500, createdAt: -21000 }));
-store.dispatch(addExpense({ description: 'Phone bill', amount: 1300, createdAt: -1000 }));
-store.dispatch(addExpense({ description: 'Lunch', amount: 1000, createdAt: 12000 }));
-store.dispatch(setTextFilter('phone'));
+store.dispatch(addExpense({ description: 'Phone bill', amount: 1300, createdAt: 12000 }));
+store.dispatch(addExpense({ description: 'Lunch', amount: 1000, createdAt: -1000 }));
+store.dispatch(addExpense({ description: 'Coke Zero', amount: 800, createdAt: -60000 }));
 
 // setTimeout(() => {
 //   store.dispatch(setTextFilter())
