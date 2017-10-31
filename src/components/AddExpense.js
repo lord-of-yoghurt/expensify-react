@@ -1,8 +1,11 @@
 import React from 'react';
 
+import Form from './ExpenseForm';
+
 const AddExpense = () => (
   <div>
-    Add expenses here
+    <h3>Add New Expense</h3>
+    <Form />
   </div>
 );
 
