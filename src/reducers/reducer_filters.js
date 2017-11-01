@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import {
   SET_TEXT_FILTER,
   SORT_BY_AMOUNT,
@@ -10,9 +12,9 @@ import {
 const filtersReducerDefaultState = {
   text: '',
   sortBy: 'amount',
-  startDate: null,
-  endDate: null,
-}
+  startDate: moment().startOf('month'),
+  endDate: moment().endOf('month'),
+};
 
 export default (state = filtersReducerDefaultState, action) => {
   switch (action.type) {
