@@ -6,3 +6,5 @@
 /.DS_Store
 
 /.env
+
+/src/tests/add.test.js
