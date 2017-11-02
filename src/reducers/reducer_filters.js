@@ -5,7 +5,7 @@ import * as co from '../constants/filters';
 // Filters reducer
 const filtersReducerDefaultState = {
   text: '',
-  sortBy: 'amount',
+  sortBy: 'date',
   startDate: moment().startOf('month'),
   endDate: moment().endOf('month'),
 };
