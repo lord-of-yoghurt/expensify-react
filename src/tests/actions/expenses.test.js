@@ -1,11 +1,6 @@
-import {
-  addExpense,
-  editExpense,
-  removeExpense,
-  ADD_EXPENSE,
-  EDIT_EXPENSE,
-  REMOVE_EXPENSE
-} from '../../actions/expenses';
+import * as expenseActions from '../../actions/expenses';
+// import { addExpense, editExpense, removeExpense } from '../../actions/expenses';
+import * as co from '../../constants/expenses';
 
 const testExpense = {
   description: 'rent',
@@ -15,10 +10,10 @@ const testExpense = {
 };
 
 test('returns a valid addExpense action object with provided values', () => {
-  const action = addExpense(testExpense);
+  const action = expenseActions.addExpense(testExpense);
 
   expect(action).toEqual({
-    type: ADD_EXPENSE,
+    type: co.ADD_EXPENSE,
     expense: {
       ...testExpense,
       id: expect.any(String)
@@ -27,10 +22,10 @@ test('returns a valid addExpense action object with provided values', () => {
 });
 
 test('returns a valid addExpense action object with default values', () => {
-  const action = addExpense();
+  const action = expenseActions.addExpense();
 
   expect(action).toEqual({
-    type: ADD_EXPENSE,
+    type: co.ADD_EXPENSE,
     expense: {
       id: expect.any(String),
       description: '',
@@ -42,20 +37,20 @@ test('returns a valid addExpense action object with default values', () => {
 });
 
 test('returns a valid editExpense action object', () => {
-  const action = editExpense('some-id', testExpense);
+  const action = expenseActions.editExpense('some-id', testExpense);
 
   expect(action).toEqual({
-    type: EDIT_EXPENSE,
+    type: co.EDIT_EXPENSE,
     id: 'some-id',
     updates: testExpense
   });
 });
 
 test('returns a valid removeExpense action object', () => {
-  const action = removeExpense({ id: 'some-id'});
+  const action = expenseActions.removeExpense({ id: 'some-id'});
 
   expect(action).toEqual({
-    type: REMOVE_EXPENSE,
+    type: co.REMOVE_EXPENSE,
     id: 'some-id'
   });
 });

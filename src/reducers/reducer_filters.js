@@ -1,12 +1,6 @@
 import moment from 'moment';
 
-import {
-  SET_TEXT_FILTER,
-  SORT_BY_AMOUNT,
-  SORT_BY_DATE,
-  SET_START_DATE,
-  SET_END_DATE
-} from '../actions/filters';
+import * as co from '../constants/filters';
 
 // Filters reducer
 const filtersReducerDefaultState = {
@@ -18,27 +12,27 @@ const filtersReducerDefaultState = {
 
 export default (state = filtersReducerDefaultState, action) => {
   switch (action.type) {
-    case SET_TEXT_FILTER:
+    case co.SET_TEXT_FILTER:
       return {
         ...state,
         text: action.text
       };
-    case SORT_BY_AMOUNT:
+    case co.SORT_BY_AMOUNT:
       return {
         ...state,
         sortBy: 'amount'
       };
-    case SORT_BY_DATE:
+    case co.SORT_BY_DATE:
       return {
         ...state,
         sortBy: 'date'
       };
-    case SET_START_DATE:
+    case co.SET_START_DATE:
       return {
         ...state,
         startDate: action.startDate
       };
-    case SET_END_DATE:
+    case co.SET_END_DATE:
       return {
         ...state,
         endDate: action.endDate

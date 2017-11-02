@@ -1,11 +1,8 @@
 import moment from 'moment';
 
+import * as co from '../../constants/filters';
+
 import {
-  SET_TEXT_FILTER,
-  SET_START_DATE,
-  SET_END_DATE,
-  SORT_BY_AMOUNT,
-  SORT_BY_DATE,
   setTextFilter,
   setStartDate,
   setEndDate,
@@ -19,7 +16,7 @@ test('generates setStartDate action object', () => {
   const action = setStartDate(testDate);
 
   expect(action).toEqual({
-    type: SET_START_DATE,
+    type: co.SET_START_DATE,
     startDate: testDate
   });
 });
@@ -28,7 +25,7 @@ test('generates setEndDate action object', () => {
   const action = setEndDate(testDate);
 
   expect(action).toEqual({
-    type: SET_END_DATE,
+    type: co.SET_END_DATE,
     endDate: testDate
   });
 });
@@ -37,7 +34,7 @@ test('generates sortByAmount action object', () => {
   const action = sortByAmount();
 
   expect(action).toEqual({
-    type: SORT_BY_AMOUNT
+    type: co.SORT_BY_AMOUNT
   });
 })
 
@@ -45,7 +42,7 @@ test('generates sortByDate action object', () => {
   const action = sortByDate();
 
   expect(action).toEqual({
-    type: SORT_BY_DATE
+    type: co.SORT_BY_DATE
   });
 })
 
@@ -53,7 +50,7 @@ test('generates setTextFilter action to clear text filter', () => {
   const action = setTextFilter();
 
   expect(action).toEqual({
-    type: SET_TEXT_FILTER,
+    type: co.SET_TEXT_FILTER,
     text: ""
   });
 });
@@ -62,7 +59,7 @@ test('generates setTextFilter action to set new filter', () => {
   const action = setTextFilter('coffee');
 
   expect(action).toEqual({
-    type: SET_TEXT_FILTER,
+    type: co.SET_TEXT_FILTER,
     text: 'coffee'
   });
 });

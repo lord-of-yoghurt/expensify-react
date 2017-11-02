@@ -1,13 +1,13 @@
-import { ADD_EXPENSE, EDIT_EXPENSE, REMOVE_EXPENSE } from '../actions/expenses';
+import * as co from '../constants/expenses';
 
 // Expenses reducer
 const expensesReducerDefaultState = [];
 
 export default (state = expensesReducerDefaultState, action) => {
   switch (action.type) {
-    case ADD_EXPENSE:
+    case co.ADD_EXPENSE:
       return [...state, action.expense];
-    case EDIT_EXPENSE:
+    case co.EDIT_EXPENSE:
       return state.map((expense) => {
         if (expense.id === action.id) {
           return {
@@ -18,7 +18,7 @@ export default (state = expensesReducerDefaultState, action) => {
           return expense;
         }
       });
-    case REMOVE_EXPENSE:
+    case co.REMOVE_EXPENSE:
       return state.filter(({ id }) => id !== action.id);
     default:
       return state;
