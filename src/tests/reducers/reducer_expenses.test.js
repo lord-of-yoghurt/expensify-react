@@ -51,7 +51,7 @@ test('handles adding an expense', () => {
 test('handles editing an existing expense', () => {
   const action = {
     type: co.EDIT_EXPENSE,
-    id: expenses[1].id,
+    id: '2', // or expenses[1].id
     updates: { note: 'no regrets' }
   };
 
@@ -63,7 +63,7 @@ test('handles editing an existing expense', () => {
 test('returns the same state if id not found', () => {
   const action = {
     type: co.EDIT_EXPENSE,
-    id: -1,
+    id: '-1',
     updates: { amount: 10000000 }
   };
 
