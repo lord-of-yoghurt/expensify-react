@@ -8,3 +8,4 @@
 /.env
 
 /src/tests/add.test.js
+/src/tests/components/__snapshots__
