@@ -1,8 +1,6 @@
 import uuid from 'uuid';
 
-export const ADD_EXPENSE = 'ADD_EXPENSE';
-export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
-export const EDIT_EXPENSE = 'EDIT_EXPENSE';
+import * as co from '../constants/expenses';
 
 // ADD_EXPENSE
 export const addExpense = (
@@ -13,7 +11,7 @@ export const addExpense = (
     createdAt = 0
    } = {}
 ) => ({
-  type: ADD_EXPENSE,
+  type: co.ADD_EXPENSE,
   expense: {
     id: uuid(),
     description,
@@ -25,13 +23,13 @@ export const addExpense = (
 
 // REMOVE_EXPENSE
 export const removeExpense = ({ id } = {}) => ({
-  type: REMOVE_EXPENSE,
+  type: co.REMOVE_EXPENSE,
   id
 });
 
 // EDIT_EXPENSE
 export const editExpense = (id, updates) => ({
-  type: EDIT_EXPENSE,
+  type: co.EDIT_EXPENSE,
   id,
   updates
 });
