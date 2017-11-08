@@ -44,7 +44,7 @@ export default class ExpenseForm extends Component {
     if (createdAt) {
       this.setState(() => ({ createdAt }));
     }
-  }
+  };
 
   onFocusChange = ({ focused }) => {
     this.setState(() => ({ calendarFocused: focused }));
@@ -67,7 +67,7 @@ export default class ExpenseForm extends Component {
       });
       this.clearForm();
     }
-  }
+  };
 
   clearForm = () => {
     this.setState(() => ({
@@ -75,7 +75,7 @@ export default class ExpenseForm extends Component {
       amount: '',
       note: ''
     }));
-  }
+  };
 
   render() {
     return (
