@@ -2,6 +2,7 @@
 /src/scrap/
 /package-lock.json
 /public/bundle.js
+/public/bundle.js.map
 
 /.DS_Store
 
