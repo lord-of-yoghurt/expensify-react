@@ -21,6 +21,8 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.5.2",
     "babel-preset-react": "^6.24.1",
     "express": "^4.16.2",
@@ -42,8 +44,6 @@
     "webpack-dev-server": "^2.9.2"
   },
   "devDependencies": {
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "css-loader": "^0.28.7",
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.0",
