@@ -4,11 +4,10 @@ import pluralize from 'pluralize';
 import { connect } from 'react-redux';
 
 import selectExpenses from '../selectors/expenses';
+import selectExpensesTotal from '../selectors/expenses-total';
 
 export const ExpenseListHeader = props => {
-  const total = props.expenses.reduce((sum, obj) => {
-    return sum + obj.amount;
-  }, 0);
+  const total = selectExpensesTotal(props.expenses);
   const length = props.expenses.length;
 
   return (
