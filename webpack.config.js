@@ -1,6 +1,5 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const Dotenv = require('dotenv-webpack');
 
 module.exports = (env) => {
   const isProduction = (env === 'production');
@@ -42,10 +41,6 @@ module.exports = (env) => {
     },
     plugins: [
       CSSExtract,
-      new Dotenv({
-        path: './.env',
-        safe: false
-      }),
     ],
     devtool: isProduction ? 'source-map' : 'inline-source-map',
     devServer: {
