@@ -8,6 +8,14 @@ import database from '../../firebase/firebase';
 
 const createMockStore = configureMockStore([thunk]);
 
+beforeEach((done) => {
+  const expensesData = {};
+  expenses.forEach(({ id, description, note, amount, createdAt }) => {
+    expensesData[id] = { description, note, amount, createdAt };
+  });
+  database.ref('expenses').set(expensesData).then(() => done());
+});
+
 test('returns a valid addExpense action object with provided values', () => {
   const action = expenseActions.addExpense(expenses[0]);
 
@@ -87,5 +95,14 @@ test('returns a valid removeExpense action object', () => {
   expect(action).toEqual({
     type: co.REMOVE_EXPENSE,
     id: 'some-id'
+  });
+});
+
+test('sets up setExpenses action with data', () => {
+  const action = expenseActions.setExpenses(expenses);
+
+  expect(action).toEqual({
+    type: co.SET_EXPENSES,
+    expenses
   });
 });
