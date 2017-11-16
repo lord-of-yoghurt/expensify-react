@@ -71,3 +71,13 @@ test('returns the same state if id not found', () => {
 
   expect(state).toEqual(expenses);
 });
+
+test('sets expenses', () => {
+  const action = {
+    type: co.SET_EXPENSES,
+    expenses: [expenses[0]]
+  };
+  const state = reducer(expenses, action);
+
+  expect(state).toEqual([expenses[0]]);
+});

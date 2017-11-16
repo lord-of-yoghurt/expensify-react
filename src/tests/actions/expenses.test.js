@@ -8,6 +8,18 @@ import database from '../../firebase/firebase';
 
 const createMockStore = configureMockStore([thunk]);
 
+beforeEach((done) => {
+  const expensesData = {};
+  expenses.forEach(({ id, description, note, amount, createdAt }) => {
+    expensesData[id] = { description, note, amount, createdAt };
+  });
+  database.ref('expenses').set(expensesData).then(() => done());
+});
+
+/*
+*** TEST ADDING EXPENSES
+ */
+
 test('returns a valid addExpense action object with provided values', () => {
   const action = expenseActions.addExpense(expenses[0]);
 
@@ -71,6 +83,36 @@ test('adds an expense with default values to database and store', (done) => {
       });
 });
 
+/*
+*** TEST FETCHING EXPENSES
+ */
+
+test('sets up setExpenses action with data', () => {
+  const action = expenseActions.setExpenses(expenses);
+
+  expect(action).toEqual({
+    type: co.SET_EXPENSES,
+    expenses
+  });
+});
+
+test('fetches expenses from firebase', (done) => {
+  const store = createMockStore({});
+  store.dispatch(expenseActions.startSetExpenses())
+    .then(() => {
+      const actions = store.getActions();
+      expect(actions[0]).toEqual({
+        type: co.SET_EXPENSES,
+        expenses
+      });
+      done();
+    });
+});
+
+/*
+*** TEST EDITING EXPENSES
+ */
+
 test('returns a valid editExpense action object', () => {
   const action = expenseActions.editExpense('some-id', expenses[1]);
 
@@ -81,6 +123,40 @@ test('returns a valid editExpense action object', () => {
   });
 });
 
+test('updates an expense on firebase', (done) => {
+  const store = createMockStore({}),
+        id = expenses[2].id,
+        updates = {
+          amount: 1499,
+          note: 'added family subscription'
+        };
+
+  store.dispatch(expenseActions.startEditExpense(id, updates))
+    .then(() => {
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: co.EDIT_EXPENSE,
+        id,
+        updates
+      });
+
+      return database.ref(`expenses/${id}`).once('value');
+    })
+    .then((snapshot) => {
+      const data = snapshot.val();
+
+      expect(data.amount).toBe(1499);
+      expect(data.note).toBe('added family subscription');
+
+      done();
+    });
+});
+
+/*
+*** TEST REMOVING EXPENSES
+ */
+
 test('returns a valid removeExpense action object', () => {
   const action = expenseActions.removeExpense({ id: 'some-id'});
 
@@ -88,4 +164,25 @@ test('returns a valid removeExpense action object', () => {
     type: co.REMOVE_EXPENSE,
     id: 'some-id'
   });
+});
+
+test('removes an expense from firebase', (done) => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+
+  store.dispatch(expenseActions.startRemoveExpense({ id }))
+    .then(() => {
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: co.REMOVE_EXPENSE,
+        id
+      });
+
+      return database.ref(`expenses/${id}`).once('value');
+    })
+    .then((snapshot) => {
+      expect(snapshot.val()).toBe(null);
+      done();
+    });
 });
