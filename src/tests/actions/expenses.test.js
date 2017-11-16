@@ -16,6 +16,10 @@ beforeEach((done) => {
   database.ref('expenses').set(expensesData).then(() => done());
 });
 
+/*
+*** TEST ADDING EXPENSES
+ */
+
 test('returns a valid addExpense action object with provided values', () => {
   const action = expenseActions.addExpense(expenses[0]);
 
@@ -79,24 +83,9 @@ test('adds an expense with default values to database and store', (done) => {
       });
 });
 
-test('returns a valid editExpense action object', () => {
-  const action = expenseActions.editExpense('some-id', expenses[1]);
-
-  expect(action).toEqual({
-    type: co.EDIT_EXPENSE,
-    id: 'some-id',
-    updates: expenses[1]
-  });
-});
-
-test('returns a valid removeExpense action object', () => {
-  const action = expenseActions.removeExpense({ id: 'some-id'});
-
-  expect(action).toEqual({
-    type: co.REMOVE_EXPENSE,
-    id: 'some-id'
-  });
-});
+/*
+*** TEST FETCHING EXPENSES
+ */
 
 test('sets up setExpenses action with data', () => {
   const action = expenseActions.setExpenses(expenses);
@@ -116,6 +105,54 @@ test('fetches expenses from firebase', (done) => {
         type: co.SET_EXPENSES,
         expenses
       });
+      done();
+    });
+});
+
+/*
+*** TEST EDITING EXPENSES
+ */
+
+test('returns a valid editExpense action object', () => {
+  const action = expenseActions.editExpense('some-id', expenses[1]);
+
+  expect(action).toEqual({
+    type: co.EDIT_EXPENSE,
+    id: 'some-id',
+    updates: expenses[1]
+  });
+});
+
+/*
+*** TEST REMOVING EXPENSES
+ */
+
+test('returns a valid removeExpense action object', () => {
+  const action = expenseActions.removeExpense({ id: 'some-id'});
+
+  expect(action).toEqual({
+    type: co.REMOVE_EXPENSE,
+    id: 'some-id'
+  });
+});
+
+test('removes an expense from firebase', (done) => {
+  const store = createMockStore({});
+  const id = expenses[0].id;
+
+  store.dispatch(expenseActions.startRemoveExpense({ id }))
+    .then(() => {
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: co.REMOVE_EXPENSE,
+        id
+      });
+
+      return database.ref(`expenses/${id}`).once('value');
+    })
+    .then((snapshot) => {
+      expect(snapshot.val()).toBe(null);
       done();
     });
 });
