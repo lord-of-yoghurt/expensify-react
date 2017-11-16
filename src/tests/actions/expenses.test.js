@@ -123,6 +123,36 @@ test('returns a valid editExpense action object', () => {
   });
 });
 
+test('updates an expense on firebase', (done) => {
+  const store = createMockStore({}),
+        id = expenses[2].id,
+        updates = {
+          amount: 1499,
+          note: 'added family subscription'
+        };
+
+  store.dispatch(expenseActions.startEditExpense(id, updates))
+    .then(() => {
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual({
+        type: co.EDIT_EXPENSE,
+        id,
+        updates
+      });
+
+      return database.ref(`expenses/${id}`).once('value');
+    })
+    .then((snapshot) => {
+      const data = snapshot.val();
+
+      expect(data.amount).toBe(1499);
+      expect(data.note).toBe('added family subscription');
+
+      done();
+    });
+});
+
 /*
 *** TEST REMOVING EXPENSES
  */
