@@ -20,7 +20,7 @@ import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 
 // db connection
-import './firebase/firebase';
+import { firebase } from './firebase/firebase';
 
 const store = configureStore();
 
@@ -34,4 +34,14 @@ ReactDOM.render(<p>Computing...</p>, document.getElementById('app'));
 
 store.dispatch(startSetExpenses()).then(() => {
   ReactDOM.render(jsx, document.getElementById('app'));
+});
+
+firebase.auth().onAuthStateChanged((user) => {
+  // user logged in
+  if (user) {
+    console.log('logged in');
+  // user logged out
+  } else {
+    console.log('logged out');
+  }
 });
