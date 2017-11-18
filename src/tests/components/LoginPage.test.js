@@ -7,7 +7,7 @@ let startLogin, wrapper;
 
 beforeEach(() => {
   startLogin = jest.fn();
-  wrapper = shallow(<LoginPage startLogin={startLogin}/>);
+  wrapper = shallow(<LoginPage startLogin={startLogin} />);
 });
 
 test('renders the LoginPage component correctly', () => {
