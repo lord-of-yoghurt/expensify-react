@@ -11,3 +11,4 @@
 /src/tests/components/__snapshots__/
 /.env.test
 /.env.development
+/__MACOSX/
