@@ -1,8 +1,8 @@
 .app-button {
-  background-color: #4285f4;
+  background-color: $button-blue;
   border: none;
   color: white;
   font-family: 'Roboto', sans-serif;
-  font-size: $m-size;
+  font-size: $font-size-large;
   padding: $s-size;
 }
