@@ -18,13 +18,22 @@ export class EditExpense extends Component {
   render() {
     return (
       <div>
-        <Form
-          expense={this.props.expense}
-          onSubmit={this.onSubmit}
-        />
-        <button onClick={this.onRemoveClick}>
-          Remove
-        </button>
+        <div className="page-header">
+          <div className="content-container">
+            <h2 className="page-header__title">Edit Expense - <span>{this.props.expense.description}</span></h2>
+          </div>
+        </div>
+        <div className="content-container">
+          <Form
+            expense={this.props.expense}
+            onSubmit={this.onSubmit}
+            canRemove={true}
+            removeExpense={this.onRemoveClick}
+          />
+          {/* <button className="app-button--form" onClick={this.onRemoveClick}>
+            Remove
+          </button> */}
+        </div>
       </div>
     );
   }
@@ -36,7 +45,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
   startEditExpense: (id, expense) => dispatch(startEditExpense(id, expense)),
-  startRemoveExpense: data => dispatch(startRemoveExpense(data))
+  startRemoveExpense: (data) => dispatch(startRemoveExpense(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditExpense);

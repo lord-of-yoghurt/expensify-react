@@ -6,7 +6,7 @@ import { startAddExpense } from '../actions/expenses';
 
 // after
 export class AddExpense extends Component {
-  onSubmit = expense => {
+  onSubmit = (expense) => {
     this.props.startAddExpense(expense);
     this.props.history.push('/dashboard');
   };
@@ -14,10 +14,16 @@ export class AddExpense extends Component {
   render() {
     return (
       <div>
-        <h3>Add New Expense</h3>
-        <Form
-          onSubmit={this.onSubmit}
-        />
+        <div className="page-header">
+          <div className="content-container">
+            <h2 className="page-header__title">Add New Expense</h2>
+          </div>
+        </div>
+        <div className="content-container">
+          <Form
+            onSubmit={this.onSubmit}
+          />
+        </div>
       </div>
     );
   }

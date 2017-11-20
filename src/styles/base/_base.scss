@@ -9,7 +9,7 @@ html {
 
 body {
   color: $dark-gray;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: 'Lora', serif;
   font-size: $m-size;
   line-height: 1.6;
 }
@@ -21,6 +21,18 @@ button {
 
 button:disabled {
   cursor: default;
+}
+
+input, textarea, select {
+  font-family: 'Roboto', sans-serif;
+}
+
+.SingleDatePicker, .SingleDatePicker__picker * {
+  @extend input;
+}
+
+.DateRangePicker, .DayPicker * {
+  @extend input;
 }
 
 .is-active {
