@@ -1,11 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
 html {
   // make rem base 10 (default is 16px)
   font-size: 62.5%;
 }
 
 body {
-  font-family: Helvetica, Arial, sans-serif;
+  color: $dark-gray;
+  font-family: 'Lora', serif;
   font-size: $m-size;
+  line-height: 1.6;
 }
 
 button {
@@ -15,6 +21,18 @@ button {
 
 button:disabled {
   cursor: default;
+}
+
+input, textarea, select {
+  font-family: 'Roboto', sans-serif;
+}
+
+.SingleDatePicker, .SingleDatePicker__picker * {
+  @extend input;
+}
+
+.DateRangePicker, .DayPicker * {
+  @extend input;
 }
 
 .is-active {
