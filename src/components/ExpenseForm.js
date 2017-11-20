@@ -112,12 +112,12 @@ export default class ExpenseForm extends Component {
         >
         </textarea>
         <div className="form__button">
-          <button className="app-button--form">Expensify!</button>
+          <button className="app-button app-button--form">Expensify!</button>
           {
             this.props.canRemove &&
             <button
               onClick={this.props.removeExpense}
-              className="app-button--remove"
+              className="app-button app-button--remove"
             >
               Remove
             </button>

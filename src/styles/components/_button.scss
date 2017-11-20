@@ -15,11 +15,9 @@
 }
 
 .app-button--form {
-  @extend .app-button;
   margin-right: $s-size;
 }
 
 .app-button--remove {
-  @extend .app-button;
   background-color: #888888;
 }
