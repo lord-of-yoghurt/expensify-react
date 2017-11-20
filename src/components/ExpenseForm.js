@@ -84,6 +84,7 @@ export default class ExpenseForm extends Component {
         <form onSubmit={this.onSubmitForm}>
           <input
             type="text"
+            className="text-input"
             placeholder="Description"
             autoFocus
             value={this.state.description}
@@ -91,6 +92,7 @@ export default class ExpenseForm extends Component {
           />
           <input
             type="text"
+            className="text-input"
             placeholder="Amount (e.g. 123.45)"
             value={this.state.amount}
             onChange={this.onAmountChange}
@@ -104,6 +106,7 @@ export default class ExpenseForm extends Component {
             isOutsideRange={() => false}
           />
           <textarea
+            className="textarea"
             placeholder="Optional note for your expense"
             value={this.state.note}
             onChange={this.onNoteChange}
