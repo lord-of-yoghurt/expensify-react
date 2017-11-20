@@ -22,6 +22,9 @@ import './styles/styles.scss';
 // db connection
 import { firebase } from './firebase/firebase';
 
+// loading screen
+import LoadingPage from './components/LoadingPage';
+
 const store = configureStore();
 
 const jsx = (
@@ -38,7 +41,7 @@ const renderApp = () => {
   }
 };
 
-ReactDOM.render(<p>Computing...</p>, document.getElementById('app'));
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged((user) => {
   // user logged in

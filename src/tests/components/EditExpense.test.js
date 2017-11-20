@@ -32,7 +32,7 @@ test('handles editing an expense correctly', () => {
 });
 
 test('handles removing an expense correctly', () => {
-  wrapper.find('button').simulate('click');
+  wrapper.find('ExpenseForm').prop('removeExpense')();
 
   expect(history.push).toHaveBeenLastCalledWith('/dashboard');
   expect(startRemoveExpense).toHaveBeenLastCalledWith({ id: expenses[0].id });
